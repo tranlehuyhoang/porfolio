@@ -1913,3 +1913,9 @@ body {
   font-family: __Roboto_Condensed_2bb51a, __Roboto_Condensed_Fallback_2bb51a;
   font-style : normal
 }
+
+.react-photo-gallery--gallery div {}
+
+.react-photo-gallery--gallery img {
+  border-radius: 20px !important;
+}

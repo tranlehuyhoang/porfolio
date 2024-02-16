@@ -1,5 +1,7 @@
-import { useState } from 'react'
-
+import { useCallback, useState } from 'react'
+import Gallery from "react-photo-gallery";
+import Carousel, { Modal as Modalnew, ModalGateway } from "react-images";
+import { photos } from "../photos";
 import './App.css'
 import { ToastContainer, toast } from 'react-toastify';
 import { Bounce } from 'react-toastify';
@@ -9,6 +11,19 @@ import Box from '@mui/material/Box';
 import { secctionCopy, modalssss, userInfo } from '../setting.js';
 import Modal from '@mui/material/Modal';
 function App() {
+  const [currentImage, setCurrentImage] = useState(0);
+  const [viewerIsOpen, setViewerIsOpen] = useState(false);
+
+  const openLightbox = useCallback((event, { photo, index }) => {
+    setCurrentImage(index);
+    setViewerIsOpen(true);
+  }, []);
+
+  const closeLightbox = () => {
+    setCurrentImage(0);
+    setViewerIsOpen(false);
+  };
+
   const style = {
     position: 'absolute',
     top: '50%',
@@ -339,6 +354,30 @@ function App() {
 
 
           </section>
+          <div className="px-4 pb-4">
+            <h1 className="  flex items-center justify-center text-2xl font-semibold">
+              gallery
+
+            </h1>
+
+          </div>
+          <div>
+            <Gallery photos={photos} onClick={openLightbox} />
+            <ModalGateway>
+              {viewerIsOpen ? (
+                <Modal onClose={closeLightbox}>
+                  <Carousel
+                    currentIndex={currentImage}
+                    views={photos.map(x => ({
+                      ...x,
+                      srcset: x.srcSet,
+                      caption: x.title
+                    }))}
+                  />
+                </Modal>
+              ) : null}
+            </ModalGateway>
+          </div>
           <div className="sticky bottom-1 z-10 grid grid-cols-2 gap-2 rounded-xl p-2 border border-slate-700 bg-slate-800/80 backdrop-blur-md shadow-[0_0_8px_4px_rgba(0,0,0,0.25)]">
             <button
               type="button"
