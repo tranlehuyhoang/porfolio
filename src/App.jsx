@@ -1,17 +1,14 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
 import { ToastContainer, toast } from 'react-toastify';
 import { Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-toastify/dist/ReactToastify.css';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import { secctionCopy, modalssss, userInfo } from '../setting.js';
 import Modal from '@mui/material/Modal';
 function App() {
-  const [count, setCount] = useState(0)
   const style = {
     position: 'absolute',
     top: '50%',
@@ -26,9 +23,9 @@ function App() {
     pb: 3,
   };
 
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [open, setOpen] = useState(0);
+  const handleOpen = (index) => setOpen(index);
+  const handleClose = () => setOpen(0);
   const copyToClipboard = (text) => {
     // Thực hiện hành động copy vào clipboard ở đây
     // Ví dụ:
@@ -57,7 +54,7 @@ function App() {
         <header className="-mx-2 mt-2 md:mx-0">
           <div className="aspect-h-1 aspect-w-2 relative flex w-full overflow-hidden rounded-xl bg-primary-900 shadow-lg">
             <img
-              alt="Nguyễn Chánh Đại's cover image"
+              alt="Le Vinh Khang's cover image"
               fetchpriority="high"
               decoding="async"
               data-nimg="fill"
@@ -70,26 +67,30 @@ function App() {
                 color: "transparent"
               }}
               sizes="(min-width: 768px) 672px, calc(100vw - 16px)"
-              src="https://scontent.fsgn8-4.fna.fbcdn.net/v/t39.30808-6/293177554_1089189635308964_5573403880901357974_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=783fdb&_nc_ohc=9v8IMfdFe_kAX-X7zue&_nc_ht=scontent.fsgn8-4.fna&oh=00_AfBimOsIRlZlREyR3LCGzDcYT0xvqZ9ECs4CyGK8G3tI8A&oe=65D29F13"
+              src=
+              {userInfo[0]['background']}
+
             />
           </div>
           <div className="relative z-20 mx-auto -mt-10 h-40 w-40 select-none overflow-hidden rounded-full border-4 border-slate-900 bg-primary-900 md:-mt-20">
             <img
-              alt="Nguyễn Chánh Đại's avatar"
+              alt="Le Vinh Khang's avatar"
               fetchpriority="high"
               width={152}
               height={152}
               decoding="async"
               data-nimg={1}
               style={{ color: "transparent" }}
-              src="https://scontent.fsgn8-3.fna.fbcdn.net/v/t1.6435-9/34984539_123433795217891_3850175453419536384_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=be3454&_nc_ohc=Ul0Am-o4Fh0AX-Qil9M&_nc_ht=scontent.fsgn8-3.fna&oh=00_AfAlRpwXp0-jtcm5DWUd_oiZEDfXi5g4dF_ipymaQFnHSw&oe=65F4F874"
+              src=
+              {userInfo[0]['avatar']}
+
             />
           </div>
         </header>
         <main className="space-y-4">
           <div className="px-4 pb-4">
             <h1 className="mb-2 flex items-center justify-center text-2xl font-semibold">
-              Giang Trần
+              {userInfo[0]['name']}
               <i className="ml-2" aria-label="Verified">
                 <svg
                   width={24}
@@ -111,43 +112,11 @@ function App() {
               </i>
             </h1>
             <h2 className="text-balance text-center text-slate-400">
-              I am a guy passionate about software creativity.
+              {userInfo[0]['info']}
+
             </h2>
           </div>
           <section className="space-y-4 rounded-xl border border-slate-700 bg-slate-800 p-4">
-            <div className="flex items-center space-x-4" >
-              <i className="text-slate-400">
-                <svg
-                  width={24}
-                  height={24}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M21.09 6.97999C20.24 6.03999 18.82 5.56999 16.76 5.56999H16.52V5.52999C16.52 3.84999 16.52 1.76999 12.76 1.76999H11.24C7.47998 1.76999 7.47998 3.85999 7.47998 5.52999V5.57999H7.23998C5.16998 5.57999 3.75998 6.04999 2.90998 6.98999C1.91998 8.08999 1.94998 9.56999 2.04998 10.58L2.05998 10.65L2.15998 11.7C2.16998 11.71 2.18998 11.73 2.20998 11.74C2.53998 11.96 2.87998 12.18 3.23998 12.38C3.37998 12.47 3.52998 12.55 3.67998 12.63C5.38998 13.57 7.26998 14.2 9.17998 14.51C9.26998 15.45 9.67998 16.55 11.87 16.55C14.06 16.55 14.49 15.46 14.56 14.49C16.6 14.16 18.57 13.45 20.35 12.41C20.41 12.38 20.45 12.35 20.5 12.32C20.96 12.06 21.39 11.78 21.81 11.47C21.83 11.46 21.85 11.44 21.86 11.42L21.9 11.06L21.95 10.59C21.96 10.53 21.96 10.48 21.97 10.41C22.05 9.39999 22.03 8.01999 21.09 6.97999ZM13.09 13.83C13.09 14.89 13.09 15.05 11.86 15.05C10.63 15.05 10.63 14.86 10.63 13.84V12.58H13.09V13.83ZM8.90998 5.56999V5.52999C8.90998 3.82999 8.90998 3.19999 11.24 3.19999H12.76C15.09 3.19999 15.09 3.83999 15.09 5.52999V5.57999H8.90998V5.56999Z"
-                    fill="currentColor"
-                  />
-                  <path
-                    opacity="0.4"
-                    d="M20.5 12.3C20.45 12.33 20.4 12.36 20.35 12.39C18.57 13.43 16.6 14.13 14.56 14.47C14.48 15.43 14.06 16.53 11.87 16.53C9.67997 16.53 9.25997 15.44 9.17997 14.49C7.26997 14.19 5.38997 13.56 3.67997 12.61C3.52997 12.53 3.37997 12.45 3.23997 12.36C2.87997 12.16 2.53997 11.94 2.20997 11.72C2.18997 11.71 2.16997 11.69 2.15997 11.68L2.76997 18.19C2.97997 20.18 3.79997 22.23 8.19997 22.23H15.82C20.22 22.23 21.04 20.18 21.25 18.18L21.88 11.4C21.87 11.42 21.85 11.44 21.83 11.45C21.4 11.76 20.96 12.05 20.5 12.3Z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </i>
-              <div className="text-balance">
-                Senior Frontend Developer / UI Design Lead{/* */} at{/* */}{" "}
-                <a
-                  href="https://simplamo.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-semibold hover:underline"
-                  aria-label="Simplamo"
-                >
-                  Simplamo
-                </a>
-              </div>
-            </div>
             <div className="flex items-center space-x-4">
               <i className="text-slate-400">
                 <svg
@@ -169,48 +138,15 @@ function App() {
                 </svg>
               </i>
               <div className="text-balance">
-                Founder / Developer{/* */} at{/* */}{" "}
+                Student{/* */} at{/* */}{" "}
                 <a
-                  href="https://zadark.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-semibold hover:underline"
-                  aria-label="ZaDark"
-                >
-                  ZaDark
-                </a>
-              </div>
-            </div>
-            <div className="flex items-center space-x-4">
-              <i className="text-slate-400">
-                <svg
-                  width={24}
-                  height={24}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M21.09 6.97999C20.24 6.03999 18.82 5.56999 16.76 5.56999H16.52V5.52999C16.52 3.84999 16.52 1.76999 12.76 1.76999H11.24C7.47998 1.76999 7.47998 3.85999 7.47998 5.52999V5.57999H7.23998C5.16998 5.57999 3.75998 6.04999 2.90998 6.98999C1.91998 8.08999 1.94998 9.56999 2.04998 10.58L2.05998 10.65L2.15998 11.7C2.16998 11.71 2.18998 11.73 2.20998 11.74C2.53998 11.96 2.87998 12.18 3.23998 12.38C3.37998 12.47 3.52998 12.55 3.67998 12.63C5.38998 13.57 7.26998 14.2 9.17998 14.51C9.26998 15.45 9.67998 16.55 11.87 16.55C14.06 16.55 14.49 15.46 14.56 14.49C16.6 14.16 18.57 13.45 20.35 12.41C20.41 12.38 20.45 12.35 20.5 12.32C20.96 12.06 21.39 11.78 21.81 11.47C21.83 11.46 21.85 11.44 21.86 11.42L21.9 11.06L21.95 10.59C21.96 10.53 21.96 10.48 21.97 10.41C22.05 9.39999 22.03 8.01999 21.09 6.97999ZM13.09 13.83C13.09 14.89 13.09 15.05 11.86 15.05C10.63 15.05 10.63 14.86 10.63 13.84V12.58H13.09V13.83ZM8.90998 5.56999V5.52999C8.90998 3.82999 8.90998 3.19999 11.24 3.19999H12.76C15.09 3.19999 15.09 3.83999 15.09 5.52999V5.57999H8.90998V5.56999Z"
-                    fill="currentColor"
-                  />
-                  <path
-                    opacity="0.4"
-                    d="M20.5 12.3C20.45 12.33 20.4 12.36 20.35 12.39C18.57 13.43 16.6 14.13 14.56 14.47C14.48 15.43 14.06 16.53 11.87 16.53C9.67997 16.53 9.25997 15.44 9.17997 14.49C7.26997 14.19 5.38997 13.56 3.67997 12.61C3.52997 12.53 3.37997 12.45 3.23997 12.36C2.87997 12.16 2.53997 11.94 2.20997 11.72C2.18997 11.71 2.16997 11.69 2.15997 11.68L2.76997 18.19C2.97997 20.18 3.79997 22.23 8.19997 22.23H15.82C20.22 22.23 21.04 20.18 21.25 18.18L21.88 11.4C21.87 11.42 21.85 11.44 21.83 11.45C21.4 11.76 20.96 12.05 20.5 12.3Z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </i>
-              <div className="text-balance">
-                Founder{/* */} at{/* */}{" "}
-                <a
-                  href="https://quaric.com"
+                  href="https://thptgiongongto.hcm.edu.vn/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-semibold hover:underline"
                   aria-label="Quaric"
                 >
-                  Quaric
+                  Giong Ong To Senior High School
                 </a>
               </div>
             </div>
@@ -236,12 +172,12 @@ function App() {
               </i>
               <div className="text-balance">
                 <a
-                  href="http://maps.google.com?q=Binh%20Thanh%20District,%20Ho%20Chi%20Minh%20City,%20Viet%20Nam"
+                  href="https://www.google.com/maps/place/Th%E1%BB%A7+%C4%90%E1%BB%A9c,+Ho+Chi+Minh+City,+Vietnam/@10.8203588,106.4948171,11z/data=!3m1!4b1!4m6!3m5!1s0x3174d85e042bf04b:0xbb26baec1664394d!8m2!3d10.8494094!4d106.7537055!16s%2Fm%2F027tph4?entry=ttu"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:underline"
                 >
-                  Binh Thanh District, Ho Chi Minh City, Viet Nam
+                  Thu Duc District, Ho Chi Minh City, Viet Nam
                 </a>
               </div>
             </div>
@@ -267,12 +203,12 @@ function App() {
               </i>
               <div className="text-balance">
                 <a
-                  href="mailto:hello@chanhdai.com?subject=Hi,+Nguyễn Chánh Đại"
+                  href="mailto:contact@levinhkhang.org?subject=Hi,+Lê Vĩnh Khang"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:underline"
                 >
-                  hello@chanhdai.com
+                  contact@levinhkhang.org
                 </a>
               </div>
             </div>
@@ -302,358 +238,112 @@ function App() {
               </i>
               <div className="text-balance">
                 <a
-                  href="https://chanhdai.com"
+                  href="https://levinhkhang.org"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:underline"
                 >
-                  chanhdai.com
+                  levinhkhang.org
                 </a>
               </div>
             </div>
           </section>
           <section className="grid grid-cols-1 gap-4 md:grid-cols-2">
 
-            <div
-              role="link"
-              tabIndex={0}
-              className="flex cursor-pointer items-center space-x-4 rounded-xl p-4 border border-slate-700 bg-slate-800 transition-all hover:border-blue-500 select-none"
-            >
-              <img
-                alt="LinkedIn"
-                loading="lazy"
-                width={48}
-                height={48}
-                decoding="async"
-                data-nimg={1}
-                className="rounded-xl shadow-md"
-                style={{ color: "transparent" }}
-                src="./_next/static/img/LINKEDIN.webp"
-              />
 
-              <a className="flex-1" href="https://www.facebook.com/">
-                <h3 className="font-semibold">LinkedIn</h3>
-                <p className="text-slate-400">iamncdai</p>
-              </a>
+            {secctionCopy.map((item, index) => (
 
 
-              <button
-                aria-label="Copy"
-                onClick={() => copyToClipboard('LinkedIn')}
-                className="text-slate-500 transition-all hover:text-slate-400"
+              <div
+                key={index}
+                role="link"
+                tabIndex={0}
+                className="flex cursor-pointer items-center space-x-4 rounded-xl p-4 border border-slate-700 bg-slate-800 transition-all hover:border-blue-500 select-none"
               >
-                <svg
-                  width={24}
-                  height={24}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+                <img
+
+                  loading="lazy"
+                  width={48}
+                  height={48}
+                  decoding="async"
+                  data-nimg={1}
+                  className="rounded-xl shadow-md"
+                  style={{ color: "transparent" }}
+                  src={item.image} alt={item.title}
+                />
+
+                <a className="flex-1" href={item.link}>
+                  <h3 className="font-semibold">{item.title}</h3>
+                  <p className="text-slate-400">{item.name}</p>
+                </a>
+
+
+                <button
+                  aria-label="Copy"
+                  onClick={() => copyToClipboard(item.link)}
+                  className="text-slate-500 transition-all hover:text-slate-400"
                 >
-                  <path
-                    opacity="0.4"
-                    d="M15.5 13.15H13.33C11.55 13.15 10.1 11.71 10.1 9.92V7.75C10.1 7.34 9.77 7 9.35 7H6.18C3.87 7 2 8.5 2 11.18V17.82C2 20.5 3.87 22 6.18 22H12.07C14.38 22 16.25 20.5 16.25 17.82V13.9C16.25 13.48 15.91 13.15 15.5 13.15Z"
-                    fill="currentColor"
-                  />
-                  <path
-                    d="M17.82 2H15.85H14.76H11.93C9.67001 2 7.84001 3.44 7.76001 6.01C7.82001 6.01 7.87001 6 7.93001 6H10.76H11.85H13.82C16.13 6 18 7.5 18 10.18V12.15V14.86V16.83C18 16.89 17.99 16.94 17.99 16.99C20.22 16.92 22 15.44 22 12.83V10.86V8.15V6.18C22 3.5 20.13 2 17.82 2Z"
-                    fill="currentColor"
-                  />
-                  <path
-                    d="M11.98 7.15C11.67 6.84 11.14 7.05 11.14 7.48V10.1C11.14 11.2 12.07 12.1 13.21 12.1C13.92 12.11 14.91 12.11 15.76 12.11C16.19 12.11 16.41 11.61 16.11 11.31C15.02 10.22 13.08 8.27 11.98 7.15Z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </button>
-            </div>
-            <div
-              role="link"
-              tabIndex={0}
-              className="flex cursor-pointer items-center space-x-4 rounded-xl p-4 border border-slate-700 bg-slate-800 transition-all hover:border-blue-500 select-none"
-            >
-              <img
-                alt="GitHub"
-                loading="lazy"
-                width={48}
-                height={48}
-                decoding="async"
-                data-nimg={1}
-                className="rounded-xl shadow-md"
-                style={{ color: "transparent" }}
-                src="./_next/static/img/GITHUB.webp"
-              />
-              <a className="flex-1" href="https://www.facebook.com/">
-                <h3 className="font-semibold">GitHub</h3>
-                <p className="text-slate-400">iamncdai</p>
-              </a>
-              <button
-                aria-label="Copy"
-                onClick={() => copyToClipboard('GitHub')}
-                className="text-slate-500 transition-all hover:text-slate-400"
-              >
-                <svg
-                  width={24}
-                  height={24}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    opacity="0.4"
-                    d="M15.5 13.15H13.33C11.55 13.15 10.1 11.71 10.1 9.92V7.75C10.1 7.34 9.77 7 9.35 7H6.18C3.87 7 2 8.5 2 11.18V17.82C2 20.5 3.87 22 6.18 22H12.07C14.38 22 16.25 20.5 16.25 17.82V13.9C16.25 13.48 15.91 13.15 15.5 13.15Z"
-                    fill="currentColor"
-                  />
-                  <path
-                    d="M17.82 2H15.85H14.76H11.93C9.67001 2 7.84001 3.44 7.76001 6.01C7.82001 6.01 7.87001 6 7.93001 6H10.76H11.85H13.82C16.13 6 18 7.5 18 10.18V12.15V14.86V16.83C18 16.89 17.99 16.94 17.99 16.99C20.22 16.92 22 15.44 22 12.83V10.86V8.15V6.18C22 3.5 20.13 2 17.82 2Z"
-                    fill="currentColor"
-                  />
-                  <path
-                    d="M11.98 7.15C11.67 6.84 11.14 7.05 11.14 7.48V10.1C11.14 11.2 12.07 12.1 13.21 12.1C13.92 12.11 14.91 12.11 15.76 12.11C16.19 12.11 16.41 11.61 16.11 11.31C15.02 10.22 13.08 8.27 11.98 7.15Z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </button>
-            </div>
-            <div
-              role="link"
-              tabIndex={0}
-              className="flex cursor-pointer items-center space-x-4 rounded-xl p-4 border border-slate-700 bg-slate-800 transition-all hover:border-blue-500 select-none"
-            >
-              <img
-                alt="Behance"
-                loading="lazy"
-                width={48}
-                height={48}
-                decoding="async"
-                data-nimg={1}
-                className="rounded-xl shadow-md"
-                style={{ color: "transparent" }}
-                src="./_next/static/img/BEHANCE.webp"
-              />
-              <a className="flex-1" href="https://www.facebook.com/">
-                <h3 className="font-semibold">Behance</h3>
-                <p className="text-slate-400">iamncdai</p>
-              </a>
-              <button
-                aria-label="Copy"
-                onClick={() => copyToClipboard('Behance')}
-                className="text-slate-500 transition-all hover:text-slate-400"
-              >
-                <svg
-                  width={24}
-                  height={24}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    opacity="0.4"
-                    d="M15.5 13.15H13.33C11.55 13.15 10.1 11.71 10.1 9.92V7.75C10.1 7.34 9.77 7 9.35 7H6.18C3.87 7 2 8.5 2 11.18V17.82C2 20.5 3.87 22 6.18 22H12.07C14.38 22 16.25 20.5 16.25 17.82V13.9C16.25 13.48 15.91 13.15 15.5 13.15Z"
-                    fill="currentColor"
-                  />
-                  <path
-                    d="M17.82 2H15.85H14.76H11.93C9.67001 2 7.84001 3.44 7.76001 6.01C7.82001 6.01 7.87001 6 7.93001 6H10.76H11.85H13.82C16.13 6 18 7.5 18 10.18V12.15V14.86V16.83C18 16.89 17.99 16.94 17.99 16.99C20.22 16.92 22 15.44 22 12.83V10.86V8.15V6.18C22 3.5 20.13 2 17.82 2Z"
-                    fill="currentColor"
-                  />
-                  <path
-                    d="M11.98 7.15C11.67 6.84 11.14 7.05 11.14 7.48V10.1C11.14 11.2 12.07 12.1 13.21 12.1C13.92 12.11 14.91 12.11 15.76 12.11C16.19 12.11 16.41 11.61 16.11 11.31C15.02 10.22 13.08 8.27 11.98 7.15Z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </button>
-            </div>
-            <div
-              role="link"
-              tabIndex={0}
-              className="flex cursor-pointer items-center space-x-4 rounded-xl p-4 border border-slate-700 bg-slate-800 transition-all hover:border-blue-500 select-none"
-            >
-              <img
-                alt="YouTube"
-                loading="lazy"
-                width={48}
-                height={48}
-                decoding="async"
-                data-nimg={1}
-                className="rounded-xl shadow-md"
-                style={{ color: "transparent" }}
-                src="./_next/static/img/YOUTUBE.webp"
-              />
-              <a className="flex-1" href="https://www.facebook.com/">
-                <h3 className="font-semibold">YouTube</h3>
-                <p className="text-slate-400">@ncdai</p>
-              </a>
-              <button
-                aria-label="Copy"
-                onClick={() => copyToClipboard('YouTube')}
-                className="text-slate-500 transition-all hover:text-slate-400"
-              >
-                <svg
-                  width={24}
-                  height={24}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    opacity="0.4"
-                    d="M15.5 13.15H13.33C11.55 13.15 10.1 11.71 10.1 9.92V7.75C10.1 7.34 9.77 7 9.35 7H6.18C3.87 7 2 8.5 2 11.18V17.82C2 20.5 3.87 22 6.18 22H12.07C14.38 22 16.25 20.5 16.25 17.82V13.9C16.25 13.48 15.91 13.15 15.5 13.15Z"
-                    fill="currentColor"
-                  />
-                  <path
-                    d="M17.82 2H15.85H14.76H11.93C9.67001 2 7.84001 3.44 7.76001 6.01C7.82001 6.01 7.87001 6 7.93001 6H10.76H11.85H13.82C16.13 6 18 7.5 18 10.18V12.15V14.86V16.83C18 16.89 17.99 16.94 17.99 16.99C20.22 16.92 22 15.44 22 12.83V10.86V8.15V6.18C22 3.5 20.13 2 17.82 2Z"
-                    fill="currentColor"
-                  />
-                  <path
-                    d="M11.98 7.15C11.67 6.84 11.14 7.05 11.14 7.48V10.1C11.14 11.2 12.07 12.1 13.21 12.1C13.92 12.11 14.91 12.11 15.76 12.11C16.19 12.11 16.41 11.61 16.11 11.31C15.02 10.22 13.08 8.27 11.98 7.15Z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </button>
-            </div>
-            <div
-              role="link"
-              tabIndex={0}
-              className="flex cursor-pointer items-center space-x-4 rounded-xl p-4 border border-slate-700 bg-slate-800 transition-all hover:border-blue-500 select-none"
-            >
-              <img
-                alt="Zalo"
-                loading="lazy"
-                width={48}
-                height={48}
-                decoding="async"
-                data-nimg={1}
-                className="rounded-xl shadow-md"
-                style={{ color: "transparent" }}
-                src="./_next/static/img/ZALO.webp"
-              />
-              <a className="flex-1" href="https://www.facebook.com/">
-                <h3 className="font-semibold">Zalo</h3>
-                <p className="text-slate-400">quaric</p>
-              </a>
-              <button
-                aria-label="Copy"
-                onClick={() => copyToClipboard('Zalo')}
-                className="text-slate-500 transition-all hover:text-slate-400"
-              >
-                <svg
-                  width={24}
-                  height={24}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    opacity="0.4"
-                    d="M15.5 13.15H13.33C11.55 13.15 10.1 11.71 10.1 9.92V7.75C10.1 7.34 9.77 7 9.35 7H6.18C3.87 7 2 8.5 2 11.18V17.82C2 20.5 3.87 22 6.18 22H12.07C14.38 22 16.25 20.5 16.25 17.82V13.9C16.25 13.48 15.91 13.15 15.5 13.15Z"
-                    fill="currentColor"
-                  />
-                  <path
-                    d="M17.82 2H15.85H14.76H11.93C9.67001 2 7.84001 3.44 7.76001 6.01C7.82001 6.01 7.87001 6 7.93001 6H10.76H11.85H13.82C16.13 6 18 7.5 18 10.18V12.15V14.86V16.83C18 16.89 17.99 16.94 17.99 16.99C20.22 16.92 22 15.44 22 12.83V10.86V8.15V6.18C22 3.5 20.13 2 17.82 2Z"
-                    fill="currentColor"
-                  />
-                  <path
-                    d="M11.98 7.15C11.67 6.84 11.14 7.05 11.14 7.48V10.1C11.14 11.2 12.07 12.1 13.21 12.1C13.92 12.11 14.91 12.11 15.76 12.11C16.19 12.11 16.41 11.61 16.11 11.31C15.02 10.22 13.08 8.27 11.98 7.15Z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </button>
-            </div>
-            <div
-              onClick={handleOpen}
-              id="myElement"
-              role="link"
-              className="flex cursor-pointer items-center space-x-4 rounded-xl p-4 border border-slate-700 bg-slate-800 transition-all hover:border-blue-500 select-none"
-            >
-              <img
-                alt="MoMo"
-                loading="lazy"
-                width={48}
-                height={48}
-                decoding="async"
-                data-nimg={1}
-                className="rounded-xl shadow-md"
-                style={{ color: "transparent" }}
-                src="./_next/static/img/MOMO.webp"
-              />
-              <div className="flex-1" >
-                <h3 className="font-semibold">MoMo</h3>
-                <p className="text-slate-400">Get QR Code</p>
+                  <svg
+                    width={24}
+                    height={24}
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      opacity="0.4"
+                      d="M15.5 13.15H13.33C11.55 13.15 10.1 11.71 10.1 9.92V7.75C10.1 7.34 9.77 7 9.35 7H6.18C3.87 7 2 8.5 2 11.18V17.82C2 20.5 3.87 22 6.18 22H12.07C14.38 22 16.25 20.5 16.25 17.82V13.9C16.25 13.48 15.91 13.15 15.5 13.15Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      d="M17.82 2H15.85H14.76H11.93C9.67001 2 7.84001 3.44 7.76001 6.01C7.82001 6.01 7.87001 6 7.93001 6H10.76H11.85H13.82C16.13 6 18 7.5 18 10.18V12.15V14.86V16.83C18 16.89 17.99 16.94 17.99 16.99C20.22 16.92 22 15.44 22 12.83V10.86V8.15V6.18C22 3.5 20.13 2 17.82 2Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      d="M11.98 7.15C11.67 6.84 11.14 7.05 11.14 7.48V10.1C11.14 11.2 12.07 12.1 13.21 12.1C13.92 12.11 14.91 12.11 15.76 12.11C16.19 12.11 16.41 11.61 16.11 11.31C15.02 10.22 13.08 8.27 11.98 7.15Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </button>
               </div>
-            </div>
-            <div
-              id="imageContainer"
-              style={{
-                display: "none",
-                backgroundColor: "rgba(0,0,0,.5)",
-                position: "fixed",
-                top: 0,
-                right: 0,
-                bottom: 0,
-                zIndex: 99,
-                justifyContent: "center",
-                width: "100%",
-                height: "100%"
-              }}
-            >
-              <img
-                id="myImage"
-                style={{ width: 384, height: 651, borderRadius: 10 }}
-                src="https://chanhdai.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fncdai-momo-qr-code.f27e538e.jpeg&w=304&q=100"
-                alt="Image"
-              />
-            </div>
-            <div
-              role="link"
-              tabIndex={0}
-              className="flex cursor-pointer items-center space-x-4 rounded-xl p-4 border border-slate-700 bg-slate-800 transition-all hover:border-blue-500 select-none"
-            >
-              <img
-                alt="PayPal"
-                loading="lazy"
-                width={48}
-                height={48}
-                decoding="async"
-                data-nimg={1}
-                className="rounded-xl shadow-md"
-                style={{ color: "transparent" }}
-                src="./_next/static/img/PAYPAL.webp"
-              />
-              <a className="flex-1" href="https://www.facebook.com/">
-                <h3 className="font-semibold">PayPal</h3>
-                <p className="text-slate-400">iamncdai</p>
-              </a>
-              <button
-                aria-label="Copy"
-                onClick={() => copyToClipboard('PayPal')}
-                className="text-slate-500 transition-all hover:text-slate-400"
+
+
+            ))}
+            {modalssss.map((item, index) => (
+
+              <div
+                key={index}
+                onClick={() => handleOpen(index + 1)}
+                id="myElement"
+                role="link"
+                className="flex cursor-pointer items-center space-x-4 rounded-xl p-4 border border-slate-700 bg-slate-800 transition-all hover:border-blue-500 select-none"
               >
-                <svg
-                  width={24}
-                  height={24}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    opacity="0.4"
-                    d="M15.5 13.15H13.33C11.55 13.15 10.1 11.71 10.1 9.92V7.75C10.1 7.34 9.77 7 9.35 7H6.18C3.87 7 2 8.5 2 11.18V17.82C2 20.5 3.87 22 6.18 22H12.07C14.38 22 16.25 20.5 16.25 17.82V13.9C16.25 13.48 15.91 13.15 15.5 13.15Z"
-                    fill="currentColor"
-                  />
-                  <path
-                    d="M17.82 2H15.85H14.76H11.93C9.67001 2 7.84001 3.44 7.76001 6.01C7.82001 6.01 7.87001 6 7.93001 6H10.76H11.85H13.82C16.13 6 18 7.5 18 10.18V12.15V14.86V16.83C18 16.89 17.99 16.94 17.99 16.99C20.22 16.92 22 15.44 22 12.83V10.86V8.15V6.18C22 3.5 20.13 2 17.82 2Z"
-                    fill="currentColor"
-                  />
-                  <path
-                    d="M11.98 7.15C11.67 6.84 11.14 7.05 11.14 7.48V10.1C11.14 11.2 12.07 12.1 13.21 12.1C13.92 12.11 14.91 12.11 15.76 12.11C16.19 12.11 16.41 11.61 16.11 11.31C15.02 10.22 13.08 8.27 11.98 7.15Z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </button>
-            </div>
+                <img
+                  src={item.image} alt={item.title}
+                  loading="lazy"
+                  width={48}
+                  height={48}
+                  decoding="async"
+                  data-nimg={1}
+                  className="rounded-xl shadow-md"
+                  style={{ color: "transparent" }}
+                />
+                <div className="flex-1" >
+                  <h3 className="font-semibold">{item.title}</h3>
+                  <p className="text-slate-400">{item.name}</p>
+                </div>
+              </div>
+            ))}
+
+
+
+
           </section>
           <div className="sticky bottom-1 z-10 grid grid-cols-2 gap-2 rounded-xl p-2 border border-slate-700 bg-slate-800/80 backdrop-blur-md shadow-[0_0_8px_4px_rgba(0,0,0,0.25)]">
             <button
               type="button"
               className="flex items-center justify-center space-x-2 rounded-lg px-4 py-2  bg-slate-700 text-white transition-colors select-none group hover:bg-blue-600"
+              onClick={() => window.location.href = 'mailto:contact@levinhkhang.org'}
             >
               <i className="text-slate-400 transition-colors group-hover:text-blue-200">
                 <svg
@@ -679,6 +369,20 @@ function App() {
             <button
               type="button"
               className="flex items-center justify-center space-x-2 rounded-lg px-4 py-2  bg-slate-700 text-white transition-colors select-none group hover:bg-blue-600"
+              onClick={() => {
+                const fileUrl = 'https://raw.githubusercontent.com/levinhkhangzz/assets/main/levinhkhangzz.vcf';
+                const fileName = 'levinhkhangzz.vcf';
+
+                // Create a link element
+                const link = document.createElement('a');
+                link.href = fileUrl;
+                link.setAttribute('download', fileName);
+
+                // Trigger a click event on the link
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+              }}
             >
               <i className="text-slate-400 transition-colors group-hover:text-blue-200">
                 <svg
@@ -717,27 +421,13 @@ function App() {
               </i>
               <span className="font-medium">Save Contact</span>
             </button>
+
           </div>
         </main>
         <footer className="space-y-4 pb-8 pt-4">
-          <div className="flex items-center justify-center space-x-4">
-            <a
-              href="//www.dmca.com/Protection/Status.aspx?ID=85a452ca-06aa-4352-bfeb-7cb563dbd2b9&refurl=https://chanhdai.com"
-              title="DMCA.com Protection Status"
-              className="dmca-badge select-none"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="https://images.dmca.com/Badges/dmca_protected_16_120.png?ID=85a452ca-06aa-4352-bfeb-7cb563dbd2b9"
-                alt="DMCA.com Protection Status"
-                style={{ height: 24 }}
-              />
-            </a>
-          </div>
           <div className="flex flex-col items-center space-y-3">
             <span className="select-none text-sm leading-none text-slate-400">
-              © {/* */}2024{/* */} Quaric. All rights reserved.
+              © {/* */}2024{/* */} Le Vinh Khang. All rights reserved.
             </span>
           </div>
         </footer>
@@ -809,7 +499,7 @@ function App() {
       <div id="imageContainer" style={{ display: "none" }}>
         <img
           id="myImage"
-          src="https://chanhdai.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fncdai-momo-qr-code.f27e538e.jpeg"
+          src="https://img.vietqr.io/image/MB-0905243477-print.png"
           alt="Image"
         />
       </div>
@@ -826,17 +516,42 @@ function App() {
         transition={Bounce}
         theme="colored"
       />
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <img src="https://chanhdai.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fncdai-momo-qr-code.f27e538e.jpeg&w=384&q=100" alt="" srcset="" />
 
-        </Box>
-      </Modal>
+
+      <div id="imageContainer" style={{ display: "none" }}>
+        <img
+          id="myImage"
+          src="https://raw.githubusercontent.com/levinhkhangzz/assets/main/6D740D71-A541-417C-BA77-8D8F1FEEF2F0.jpeg"
+          alt="Image"
+        />
+      </div>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        transition={Bounce}
+        theme="colored"
+      />
+      {modalssss.map((item, index) => (
+
+        <Modal key={index + 1}
+          open={open == index + 1}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <img src={item.modal} alt={item.title} />
+
+          </Box>
+        </Modal>
+      ))}
     </>
 
   )
